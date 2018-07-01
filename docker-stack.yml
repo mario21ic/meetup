@@ -3,9 +3,11 @@ version: "3"
 services:
   backend:
     image: "myimage:latest"
+    networks:
+      - frontend
     ports:
       - 8090:8090
-    command: python meetup/manage.py runserver 0:8090
+    command: python /meetup/meetup/manage.py runserver 0.0.0.0:8090
     deploy:
       mode: replicated
       replicas: 2
@@ -14,3 +16,6 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+
+networks:
+  frontend:

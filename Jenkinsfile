@@ -13,8 +13,10 @@ pipeline {
     stage("Build") {
       steps {
         sh "zip -r ${ARTIFACTOR} ./meetup/"
-        sh "docker build -t myimage:${env.BUILD_NUMBER} ."
-        sh "docker tag myimage:${env.BUILD_NUMBER} myimage:latest"
+        //sh "docker build -t myimage:${env.BUILD_NUMBER} ."
+        //sh "docker tag myimage:${env.BUILD_NUMBER} myimage:latest"
+        sh "echo \"BUILD_NUMBER=${env.BUILD_NUMBER}\" > .env"
+        sh "docker-compose build"
       }
     }
     stage("Test") {

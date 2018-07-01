@@ -28,6 +28,11 @@ pipeline {
         )
       }
     }
+    stage("Deploy") {
+      steps {
+          sh "docker stack deploy --compose-file docker-stack.yml meetup"
+      }
+    }
   } 
 
   post {

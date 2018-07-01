@@ -13,6 +13,8 @@ pipeline {
     stage("Build") {
       steps {
         sh "zip -r ${ARTIFACTOR} ./meetup/"
+        sh "docker build -t myimage:${env.BUILD_NUMBER} ."
+        sh "docker tag myimage:${env.BUILD_NUMBER} myimage:latest"
       }
     }
     stage("Test") {
